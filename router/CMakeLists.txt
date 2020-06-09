@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include_directories(../netlink)
+
 add_vpp_plugin(router
   SOURCES
   ../netlink/librtnl/mapper.c

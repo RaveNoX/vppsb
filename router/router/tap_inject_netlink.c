@@ -188,7 +188,7 @@ add_del_route (ns_route_t * r, int is_del)
       clib_memcpy (&nh.ip4, r->gateway, sizeof (nh.ip4));
       if(*stack == 0)
         fib_table_entry_path_add (0, &prefix, FIB_SOURCE_API,
-                                  FIB_ENTRY_FLAG_NONE, prefix.fp_proto,
+                                  FIB_ENTRY_FLAG_NONE, fib_proto_to_dpo(prefix.fp_proto),
                                   &nh, sw_if_index, 0,
                                   0 /* weight */, NULL,
                                   FIB_ROUTE_PATH_FLAG_NONE);
@@ -222,7 +222,7 @@ add_del_route (ns_route_t * r, int is_del)
       memset (&nh, 0, sizeof (nh));
       clib_memcpy (&nh.ip6, r->gateway, sizeof (nh.ip6));
       fib_table_entry_path_add (0, &prefix, FIB_SOURCE_API,
-                                FIB_ENTRY_FLAG_NONE, prefix.fp_proto,
+                                FIB_ENTRY_FLAG_NONE, fib_proto_to_dpo(prefix.fp_proto),
                                 &nh, sw_if_index, 0,
                                 0 /* weight */, NULL,
                                 FIB_ROUTE_PATH_FLAG_NONE);

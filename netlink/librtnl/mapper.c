@@ -76,7 +76,7 @@ int mapper_add_del_route(mapper_ns_t *ns, ns_route_t *route, int del)
     clib_memcpy (&nh.ip6, route->gateway, sizeof (nh.ip6));
 
     fib_table_entry_path_add (ns->v6fib_index, &prefix, FIB_SOURCE_API,
-                              FIB_ENTRY_FLAG_NONE, prefix.fp_proto,
+                              FIB_ENTRY_FLAG_NONE, fib_proto_to_dpo(prefix.fp_proto),
                               &nh, map->sw_if_index, ns->v6fib_index,
                               0 /* weight */,
                               (fib_mpls_label_t *) MPLS_LABEL_INVALID,
@@ -94,7 +94,7 @@ int mapper_add_del_route(mapper_ns_t *ns, ns_route_t *route, int del)
     clib_memcpy (&nh.ip4, route->gateway, sizeof (nh.ip4));
 
     fib_table_entry_path_add (ns->v4fib_index, &prefix, FIB_SOURCE_API,
-                              FIB_ENTRY_FLAG_NONE, prefix.fp_proto,
+                              FIB_ENTRY_FLAG_NONE, fib_proto_to_dpo(prefix.fp_proto),
                               &nh, map->sw_if_index, ns->v4fib_index,
                               0 /* weight */,
                               (fib_mpls_label_t *) MPLS_LABEL_INVALID,
